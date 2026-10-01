@@ -1,29 +1,29 @@
 /* eslint-disable no-undef */
 
+import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import TodoInputComponent from './components/TodoInputComponent';
-import TodoListComponenet from './components/TodoListComponenet';
-import { useEffect, useState } from 'react';
+import ProductService from './services/productService';
+import axios from 'axios';
 
 
+axios.defaults.baseURL = 'http://dummyjson.com';
 
 
 function App() {
-  const[todoItems, setTodoItems] = useState([]);
   
   useEffect(() => {
-    console.log(todoItems);
-  }, [todoItems])
+    ProductService.getSingleProduct()
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+  }, [])
+  
+
   
 
   return (
     <div className='container mx-auto flex flex-col items-center justify-center'>
-        <h1 className='text-[60px] text-green-600 font-extrabold my-[30px]'>TODO APP</h1>
-
-
-        <TodoInputComponent todoItems={todoItems} setTodoItems={setTodoItems}/>
-        <TodoListComponenet todoItems={todoItems} setTodoItems={setTodoItems}/>
+      <h1>RADI</h1>
         <ToastContainer />
         
 
