@@ -1,30 +1,29 @@
 /* eslint-disable no-undef */
-
-import { useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
-import ProductService from './services/productService';
 import axios from 'axios';
+import useFetch from './utils/useFetch';
+import CardComponent from './components/CardComponent';
+import NavbarComponent from './components/NavbarComponent';
 
 
 axios.defaults.baseURL = 'http://dummyjson.com';
 
 
 function App() {
-  
-  useEffect(() => {
-    ProductService.getSingleProduct()
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-  }, [])
-  
+
+  const {data, loading} = useFetch();
+
 
   
 
   return (
-    <div className='container mx-auto flex flex-col items-center justify-center'>
-      <h1>RADI</h1>
-        <ToastContainer />
+    <div className='flex flex-col items-center justify-center container mx-auto mt-[50px]'>
+      <NavbarComponent />
+
+      <div className='flex flex-wrap gap-[20px] justify-center` mt-[50px]'>
+        {loading ? data.map((product) => {
+          return <CardComponent key={product.id} product={product} />
+        }) : <h2>Loading...</h2>}
+      </div>
         
 
       
