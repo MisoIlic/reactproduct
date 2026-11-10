@@ -7,4 +7,7 @@
         
     
 }
+.active {
+    @apply text-white text-[20px];
+}
 

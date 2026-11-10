@@ -1,37 +1,23 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
-import useFetch from './utils/useFetch';
-import CardComponent from './components/CardComponent';
 import NavbarComponent from './components/NavbarComponent';
+import { Outlet } from 'react-router-dom';
 
 
-axios.defaults.baseURL = 'http://dummyjson.com';
+axios.defaults.baseURL = 'https://dummyjson.com';
 
 
 function App() {
 
-  const {data, loading} = useFetch();
-
-
-  
-
   return (
-    <div className='flex flex-col items-center justify-center container mx-auto mt-[50px]'>
+    <div>
       <NavbarComponent />
 
-      <div className='flex flex-wrap gap-[20px] justify-center` mt-[50px]'>
-        {loading ? data.map((product) => {
-          return <CardComponent key={product.id} product={product} />
-        }) : <h2>Loading...</h2>}
-      </div>
-        
+      <Outlet />
 
-      
     </div>
   )
 
-    
-  
 }
  
   
